@@ -5,17 +5,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const totalEl = document.getElementById("total");
 
   const itemsDisponibles = [
-    { descripcion: "Ataud para Nicho N° 15", precio: 630000 },
+    { descripcion: "Ataud para Nicho N° 15", precio: 645000 },
     { descripcion: "Ataud para Nicho Semi-Extraordinario", precio: 752000 },
     { descripcion: "Ataud para Nicho Extraordinario", precio: 1160000 },
-    { descripcion: "Nicho Nuevo", precio: 700000 },
-    { descripcion: "Nicho Usado", precio: 350000 },
-    { descripcion: "VELACION X HORA", precio: 160000 },
-    { descripcion: "GASTOS ADMINISTRATIVOS", precio: 80000 },
+    { descripcion: "Gastos Administrativos", precio: 182000 },
+    { descripcion: "Nicho Nuevo", precio: 950000 },
+    { descripcion: "Nicho Usado", precio: 450000 },
+    { descripcion: "Cremacion", precio: 920000 },
+    { descripcion: "Hora de Velacion", precio: 160000 },
+    { descripcion: "Traslado x Kilometro", precio: 5200 },
     { descripcion: "Ataud para Tierra N° 15", precio: 418000 },
-    { descripcion: "Ataud para Tierra Semi-Extraordinario", precio: 490000 },
- 
-    
+    { descripcion: "Ataud para Tierra Semi-Extraordinario", precio: 490000 },  
 
     // agregar más ítems según sea necesario
   ];
@@ -108,3 +108,4 @@ document.addEventListener("DOMContentLoaded", () => {
   btnAgregar.addEventListener("click", agregarFila);
   btnImprimir.addEventListener("click", () => window.print());
 });
+
