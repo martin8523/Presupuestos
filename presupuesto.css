@@ -1,187 +1,97 @@
-/* Base */
-@media (max-width: 576px) {
-  table {
-    font-size: 12px;
-  }
-
-  table th,
-  table td {
-    padding: 4px;
-  }
-
-  table input,
-  table select {
-    font-size: 12px;
-    padding: 2px;
-  }
-}
-
 body {
   font-family: Arial, sans-serif;
   background: #f4f4f9;
   color: #333;
 }
 
-/* Header */
+/* Logo tipo membrete */
 header img {
-  max-width: 150px;
+  max-height: 140px;
+  object-fit: contain;
 }
 
-header h2 {
-  color: #4CAF50;
-  font-weight: bold;
+/* Tabla factura */
+table {
+  table-layout: fixed;
 }
 
-input {
-  max-width: 300px;
-}
-
-/* Tabla */
-table th {
-  background-color: #e9ecef;
-}
-
-table td,
-table th {
-  vertical-align: middle;
-}
-
-/* Inputs dentro de tabla */
-table input,
-table select {
-  width: 100%;
+th, td {
   text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 
-/* Botones */
-.botones,
-.d-flex {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-/* Total */
-.total,
-.text-end {
-  font-size: 1.2rem;
-  font-weight: bold;
-}
+/* Anchos columnas */
+th:nth-child(1), td:nth-child(1) { width: 50%; }
+th:nth-child(2), td:nth-child(2) { width: 15%; }
+th:nth-child(3), td:nth-child(3) { width: 15%; }
+th:nth-child(4), td:nth-child(4) { width: 20%; }
 
 /* Footer */
 footer {
-  background-color: #ececec;
-  padding: 15px 0;
+  background: #ececec;
   font-size: 0.9rem;
 }
 
-/* Ajustes mobile */
+/* Mobile */
 @media (max-width: 576px) {
-  header h2 {
-    font-size: 1.3rem;
+  table {
+    font-size: 12px;
   }
 
-  footer {
-    text-align: center;
+  th, td {
+    padding: 4px;
   }
 
-  .text-end {
-    text-align: center !important;
+  input {
+    font-size: 12px;
   }
 }
 
-/* Impresión tipo factura */
+/* Impresión A4 */
 @media print {
 
-  /* Tamaño de hoja A4 */
   @page {
     size: A4 portrait;
-    margin: 15mm;
+    margin: 12mm;
   }
 
   body {
-    background: white !important;
-    font-size: 11pt;
+    background: white;
+    font-size: 10pt;
   }
 
-  /* Ocultar botones y controles */
   .btn,
-  .botones,
-  button {
+  .botones {
     display: none !important;
   }
 
-  /* Forzar tabla como tabla real */
   table {
-    width: 100% !important;
-    border-collapse: collapse !important;
-    min-width: 100% !important;
+    width: 100%;
+    border-collapse: collapse;
   }
 
-  thead {
-    display: table-header-group;
-  }
-
-  tbody {
-    display: table-row-group;
-  }
-
-  tr {
-    display: table-row;
-    page-break-inside: avoid;
-  }
-
-  th,
-  td {
-    display: table-cell !important;
-    padding: 6px;
+  th, td {
     border: 1px solid #000;
-    text-align: center;
-    font-size: 10pt;
+    padding: 6px;
+    font-size: 9.5pt;
   }
 
-  /* Inputs impresos como texto */
-  input,
-  select {
-    border: none !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    pointer-events: none;
-    text-align: center;
-    font-size: 10pt;
+  input {
+    border: none;
+    background: transparent;
+    padding: 0;
   }
 
-  /* Logo y encabezado */
-  header img {
-    max-width: 120px;
-  }
-
-  header {
-    margin-bottom: 10px;
-  }
-
-  /* Total */
-  .text-end {
-    text-align: right !important;
-    font-size: 12pt;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-
-  /* Footer siempre abajo */
   footer {
     position: fixed;
     bottom: 10mm;
     left: 0;
     right: 0;
-    font-size: 9pt;
     border-top: 1px solid #000;
-    padding-top: 5px;
+    background: white;
+    padding-top: 6px;
+    font-size: 9pt;
   }
 }
-
-
-
-
-
-
 
