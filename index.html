@@ -2,86 +2,60 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Presupuesto</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="presupuesto.css">
 </head>
-
 <body>
 
-<div class="container my-3">
+<div class="container">
 
-<header>
-  <img src="logo.png" class="img-fluid w-100 mb-3">
+  <img src="logo.png" class="logo">
 
-  <div class="row mb-3">
-    <div class="col-md-6">
-      <strong>Destinatario</strong>
-      <input type="text" class="form-control">
+  <div class="top">
+    <div>
+      Presupuesto Nº <b id="numero"></b><br>
+      Fecha: <b id="fecha"></b>
     </div>
-
-    <div class="col-md-3">
-      <strong>Fecha</strong><br>
-      <span id="fecha"></span>
-    </div>
-
-    <div class="col-md-3 text-end">
-      <strong>Factura N°</strong><br>
-      <span id="numero"></span>
+    <div>
+      Destinatario:<br>
+      <input id="cliente">
     </div>
   </div>
 
-  <div class="row mb-3">
-    <div class="col-md-4">
-      <label>Tipo de comprobante</label>
-      <select id="tipoFactura" class="form-select">
-        <option value="B">Factura B</option>
-        <option value="A">Factura A</option>
-      </select>
-    </div>
+  Tipo factura:
+  <select id="tipoFactura">
+    <option value="B">B</option>
+    <option value="A">A</option>
+  </select>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Detalle</th>
+        <th>Cant</th>
+        <th>Precio</th>
+        <th>Subtotal</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="detalle"></tbody>
+  </table>
+
+  <div class="botones">
+    <button id="agregar">➕ Agregar</button>
+    <button onclick="window.print()">🖨 Imprimir</button>
+    <a href="items.html">⚙ Editar ítems</a>
   </div>
 
-  <hr>
-</header>
-
-<table class="table table-bordered text-center align-middle">
-<thead>
-<tr>
-  <th>Detalle</th>
-  <th>Cantidad</th>
-  <th>Precio Unit.</th>
-  <th>Subtotal</th>
-</tr>
-</thead>
-<tbody id="detalle-items"></tbody>
-</table>
-
-<div class="d-flex gap-2 my-3 justify-content-center botones">
-  <button class="btn btn-success" id="btnAgregar">➕ Agregar</button>
-  <button class="btn btn-success" id="btnPrint">🖨 Imprimir</button>
-  <button class="btn btn-success" id="btnPDF">📄 PDF</button>
-  <a href="items.html" class="btn btn-secondary">⚙️ Administrar Ítems</a>
-</div>
-
-<div class="row justify-content-end">
-  <div class="col-md-4">
-    <table class="table">
-      <tr><td>Neto</td><td id="neto">$0</td></tr>
-      <tr><td>IVA 21%</td><td id="iva">$0</td></tr>
-      <tr><td>Ingresos Brutos 8%</td><td id="iibb">$0</td></tr>
-      <tr class="fw-bold"><td>Total</td><td id="total">$0</td></tr>
-    </table>
+  <div class="totales">
+    <div>Neto <span id="neto">0</span></div>
+    <div>IVA 21% <span id="iva">0</span></div>
+    <div>IIBB 8% <span id="iibb">0</span></div>
+    <div>Total <span id="total">0</span></div>
   </div>
-</div>
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
 <script src="presupuesto.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
