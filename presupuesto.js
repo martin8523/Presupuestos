@@ -32,15 +32,36 @@ function agregarFila(){
 }
 
 function calcular(){
-  let neto=0;
+  let bruto = 0;
+
   document.querySelectorAll("#detalle-items tr").forEach(tr=>{
-    const cant=+tr.querySelector(".cant").value||0;
-    const precio=+tr.querySelector(".precio").dataset.valor||0;
-    const sub=cant*precio;
-    tr.querySelector(".precio").innerText=precio.toLocaleString("es-AR");
-    tr.querySelector(".sub").innerText=sub.toLocaleString("es-AR");
-    neto+=sub;
+    const cant = +tr.querySelector(".cant").value || 0;
+    const precio = +tr.querySelector(".precio").dataset.valor || 0;
+    const sub = cant * precio;
+
+    tr.querySelector(".precio").innerText = precio.toLocaleString("es-AR");
+    tr.querySelector(".sub").innerText = sub.toLocaleString("es-AR");
+
+    bruto += sub;
   });
+
+  let neto = bruto;
+  let iva = 0;
+
+  if(document.getElementById("tipoFactura").value === "A"){
+    neto = bruto / 1.21;
+    iva = bruto - neto;
+  }
+
+  const iibb = neto * 0.08;
+  const total = bruto + iibb;
+
+  document.getElementById("neto").innerText = neto.toLocaleString("es-AR");
+  document.getElementById("iva").innerText = iva.toLocaleString("es-AR");
+  document.getElementById("iibb").innerText = iibb.toLocaleString("es-AR");
+  document.getElementById("total").innerText = total.toLocaleString("es-AR");
+}
+
 
   let iva=0,iibb=0;
   if(document.getElementById("tipoFactura").value==="A"){
@@ -58,6 +79,7 @@ document.getElementById("btnAgregar").onclick=agregarFila;
 document.getElementById("btnPrint").onclick=()=>window.print();
 document.getElementById("btnPDF").onclick=()=>html2pdf().from(document.body).save();
 document.getElementById("tipoFactura").onchange=calcular;
+
 
 
 
