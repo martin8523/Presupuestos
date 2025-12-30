@@ -70,7 +70,7 @@ button:hover { background-color: #45a049; }
   .main {grid-area: 2 / span 1;}
   .footer {grid-area: 3 / span 6;}
   .img {
-  max-width: 75%;
+  max-width: 100%;
   height: auto;
   }
 }
@@ -81,6 +81,7 @@ button:hover { background-color: #45a049; }
   input , .cantidad {border-style: none;}
  
 }
+
 
 
 
