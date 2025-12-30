@@ -1,4 +1,21 @@
 /* Base */
+@media (max-width: 576px) {
+  table {
+    font-size: 12px;
+  }
+
+  table th,
+  table td {
+    padding: 4px;
+  }
+
+  table input,
+  table select {
+    font-size: 12px;
+    padding: 2px;
+  }
+}
+
 body {
   font-family: Arial, sans-serif;
   background: #f4f4f9;
@@ -74,33 +91,94 @@ footer {
 
 /* Impresión tipo factura */
 @media print {
-  body {
-    background: white;
+
+  /* Tamaño de hoja A4 */
+  @page {
+    size: A4 portrait;
+    margin: 15mm;
   }
 
+  body {
+    background: white !important;
+    font-size: 11pt;
+  }
+
+  /* Ocultar botones y controles */
   .btn,
   .botones,
   button {
     display: none !important;
   }
 
+  /* Forzar tabla como tabla real */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    min-width: 100% !important;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tbody {
+    display: table-row-group;
+  }
+
+  tr {
+    display: table-row;
+    page-break-inside: avoid;
+  }
+
+  th,
+  td {
+    display: table-cell !important;
+    padding: 6px;
+    border: 1px solid #000;
+    text-align: center;
+    font-size: 10pt;
+  }
+
+  /* Inputs impresos como texto */
   input,
   select {
-    border: none;
-    background: none;
-    padding: 0;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    pointer-events: none;
+    text-align: center;
+    font-size: 10pt;
   }
 
-  table {
-    font-size: 12px;
+  /* Logo y encabezado */
+  header img {
+    max-width: 120px;
   }
 
+  header {
+    margin-bottom: 10px;
+  }
+
+  /* Total */
+  .text-end {
+    text-align: right !important;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  /* Footer siempre abajo */
   footer {
+    position: fixed;
+    bottom: 10mm;
+    left: 0;
+    right: 0;
+    font-size: 9pt;
     border-top: 1px solid #000;
-    margin-top: 20px;
-    padding-top: 10px;
+    padding-top: 5px;
   }
 }
+
 
 
 
