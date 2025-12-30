@@ -1,20 +1,24 @@
-  const hoy = new Date();
-  document.getElementById("fecha").innerText =
-    hoy.toLocaleDateString("es-AR");
+  document.addEventListener("DOMContentLoaded", () => {
 
-  const numero = hoy.getFullYear().toString().slice(-2) +
-                 (hoy.getMonth()+1).toString().padStart(2,"0") +
-                 hoy.getDate().toString().padStart(2,"0") +
-                 Math.floor(Math.random()*1000).toString().padStart(3,"0");
-
-  document.getElementById("numero").innerText = numero;
-
-document.addEventListener("DOMContentLoaded", () => {
-  const detalle = document.getElementById("detalle-items");
+  const tbody = document.getElementById("detalle-items");
   const btnAgregar = document.getElementById("btn-agregar");
   const btnImprimir = document.getElementById("btn-imprimir");
   const totalEl = document.getElementById("total");
 
+  /* Fecha */
+  const hoy = new Date();
+  document.getElementById("fecha").innerText = hoy.toLocaleDateString("es-AR");
+
+  /* Número automático */
+  const numero =
+    hoy.getFullYear().toString().slice(-2) +
+    (hoy.getMonth() + 1).toString().padStart(2, "0") +
+    hoy.getDate().toString().padStart(2, "0") +
+    Math.floor(Math.random() * 1000).toString().padStart(3, "0");
+
+  document.getElementById("numero").innerText = numero;
+
+  /* Items */
   const itemsDisponibles = [
     { descripcion: "Ataud para Nicho N° 15", precio: 645000 },
     { descripcion: "Ataud para Nicho Semi-Extraordinario", precio: 752000 },
@@ -26,34 +30,36 @@ document.addEventListener("DOMContentLoaded", () => {
     { descripcion: "Hora de Velacion", precio: 160000 },
     { descripcion: "Traslado x Kilometro", precio: 5200 },
     { descripcion: "Ataud para Tierra N° 15", precio: 418000 },
-    { descripcion: "Ataud para Tierra Semi-Extraordinario", precio: 490000 },  
-
-    // agregar más ítems según sea necesario
+    { descripcion: "Ataud para Tierra Semi-Extraordinario", precio: 490000 }
   ];
-
-  document.getElementById("fecha").textContent = new Date().toLocaleDateString("es-AR");
 
   function calcularTotal() {
     let total = 0;
-    detalle.querySelectorAll(".item-row").forEach(row => {
-      const cantidad = parseFloat(row.querySelector(".cantidad").value) || 0;
-      const precio = parseFloat(row.querySelector(".precio").textContent) || 0;
-      total += cantidad * precio;
-      row.querySelector(".importe").textContent = (cantidad * precio).toFixed(0);
+
+    tbody.querySelectorAll("tr").forEach(tr => {
+      const cantidad = parseFloat(tr.querySelector(".cantidad").value) || 0;
+      const precio = parseFloat(tr.querySelector(".precio").innerText) || 0;
+      const importe = cantidad * precio;
+
+      tr.querySelector(".importe").innerText = importe.toLocaleString("es-AR");
+      total += importe;
     });
-    totalEl.textContent = total.toLocaleString("es-AR");
+
+    totalEl.innerText = total.toLocaleString("es-AR");
   }
 
   function agregarFila() {
-    const fila = document.createElement("div");
-    fila.className = "item-row";
+    const tr = document.createElement("tr");
 
-    // Selección de ítem
+    /* Columna Detalle */
+    const tdDetalle = document.createElement("td");
     const select = document.createElement("select");
-    const emptyOption = document.createElement("option");
-    emptyOption.value = "";
-    emptyOption.textContent = "-- Seleccione ítem --";
-    select.appendChild(emptyOption);
+    select.className = "form-select";
+
+    const optEmpty = document.createElement("option");
+    optEmpty.textContent = "-- Seleccione ítem --";
+    optEmpty.value = "";
+    select.appendChild(optEmpty);
 
     itemsDisponibles.forEach(it => {
       const opt = document.createElement("option");
@@ -63,55 +69,45 @@ document.addEventListener("DOMContentLoaded", () => {
       select.appendChild(opt);
     });
 
-    // Descripción y precio
-    const labelDesc = document.createElement("label");
-    labelDesc.textContent = "";
+    tdDetalle.appendChild(select);
 
+    /* Cantidad */
+    const tdCantidad = document.createElement("td");
     const inputCantidad = document.createElement("input");
     inputCantidad.type = "number";
-    inputCantidad.min = "1";
-    inputCantidad.value = "1";
-    inputCantidad.className = "cantidad";
+    inputCantidad.value = 1;
+    inputCantidad.min = 1;
+    inputCantidad.className = "form-control cantidad";
+    tdCantidad.appendChild(inputCantidad);
 
-    const labelPrecio = document.createElement("label");
-    labelPrecio.textContent = "0";
-    labelPrecio.className = "precio";
+    /* Precio */
+    const tdPrecio = document.createElement("td");
+    tdPrecio.className = "precio";
+    tdPrecio.innerText = "0";
 
-    const labelImporte = document.createElement("label");
-    labelImporte.textContent = "0";
-    labelImporte.className = "importe";
+    /* Subtotal */
+    const tdImporte = document.createElement("td");
+    tdImporte.className = "importe";
+    tdImporte.innerText = "0";
 
-    // Botón eliminar
-    const btnEliminar = document.createElement("button");
-    btnEliminar.type = "button";
-    btnEliminar.textContent = "❌";
+    tr.appendChild(tdDetalle);
+    tr.appendChild(tdCantidad);
+    tr.appendChild(tdPrecio);
+    tr.appendChild(tdImporte);
 
-    fila.appendChild(select);
-    fila.appendChild(labelDesc);
-    fila.appendChild(inputCantidad);
-    fila.appendChild(labelPrecio);
-    fila.appendChild(labelImporte);
-    fila.appendChild(btnEliminar);
-
-    detalle.appendChild(fila);
+    tbody.appendChild(tr);
 
     select.addEventListener("change", () => {
-      const selected = select.selectedOptions[0];
-      if (!selected.value) {
-        labelDesc.textContent = "";
-        labelPrecio.textContent = "0";
+      const sel = select.selectedOptions[0];
+      if (sel && sel.dataset.precio) {
+        tdPrecio.innerText = parseFloat(sel.dataset.precio).toLocaleString("es-AR");
       } else {
-        labelDesc.textContent = selected.value;
-        labelPrecio.textContent = parseFloat(selected.dataset.precio).toFixed(0);
+        tdPrecio.innerText = "0";
       }
       calcularTotal();
     });
 
     inputCantidad.addEventListener("input", calcularTotal);
-    btnEliminar.addEventListener("click", () => {
-      fila.remove();
-      calcularTotal();
-    });
 
     calcularTotal();
   }
@@ -119,5 +115,4 @@ document.addEventListener("DOMContentLoaded", () => {
   btnAgregar.addEventListener("click", agregarFila);
   btnImprimir.addEventListener("click", () => window.print());
 });
-
 
