@@ -13,9 +13,7 @@ header {
   border-top-style: groove;
   border-bottom-style: groove;
 }
-.content {
-  grid-area: main;
-}
+
 .logo { width: 120px; margin-bottom: 10px; }
 .encabezado-texto h1 { color: #4CAF50; margin: 5px 0; }
 .encabezado-texto p { margin: 2px 0; }
@@ -73,6 +71,7 @@ button:hover { background-color: #45a049; }
   input , .cantidad {border-style: none;}
  
 }
+
 
 
 
