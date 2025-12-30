@@ -1,3 +1,14 @@
+  const hoy = new Date();
+  document.getElementById("fecha").innerText =
+    hoy.toLocaleDateString("es-AR");
+
+  const numero = hoy.getFullYear().toString().slice(-2) +
+                 (hoy.getMonth()+1).toString().padStart(2,"0") +
+                 hoy.getDate().toString().padStart(2,"0") +
+                 Math.floor(Math.random()*1000).toString().padStart(3,"0");
+
+  document.getElementById("numero").innerText = numero;
+
 document.addEventListener("DOMContentLoaded", () => {
   const detalle = document.getElementById("detalle-items");
   const btnAgregar = document.getElementById("btn-agregar");
@@ -108,4 +119,5 @@ document.addEventListener("DOMContentLoaded", () => {
   btnAgregar.addEventListener("click", agregarFila);
   btnImprimir.addEventListener("click", () => window.print());
 });
+
 
