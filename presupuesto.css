@@ -111,14 +111,6 @@ button{
     outline:none !important;
     box-shadow:none !important;
   }
-
-  .container{
-    box-shadow:none;
-    margin:0;
-    width:100%;
-  }
-
-  .table th, .table td{
-    border:1px solid black;
-  }
 }
+
+
