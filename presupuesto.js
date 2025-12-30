@@ -1,118 +1,64 @@
-  document.addEventListener("DOMContentLoaded", () => {
-
-  const tbody = document.getElementById("detalle-items");
-  const btnAgregar = document.getElementById("btn-agregar");
-  const btnImprimir = document.getElementById("btn-imprimir");
-  const totalEl = document.getElementById("total");
-
-  /* Fecha */
   const hoy = new Date();
-  document.getElementById("fecha").innerText = hoy.toLocaleDateString("es-AR");
+document.getElementById("fecha").innerText = hoy.toLocaleDateString("es-AR");
+document.getElementById("numero").innerText =
+  hoy.getFullYear().toString().slice(-2) +
+  (hoy.getMonth()+1) + hoy.getDate() +
+  Math.floor(Math.random()*1000);
 
-  /* Número automático */
-  const numero =
-    hoy.getFullYear().toString().slice(-2) +
-    (hoy.getMonth() + 1).toString().padStart(2, "0") +
-    hoy.getDate().toString().padStart(2, "0") +
-    Math.floor(Math.random() * 1000).toString().padStart(3, "0");
+const items = [
+  { d:"Ataud", p:450000 },
+  { d:"Cremación", p:920000 },
+  { d:"Velatorio", p:160000 }
+];
 
-  document.getElementById("numero").innerText = numero;
+function agregarFila(){
+  const tr = document.createElement("tr");
 
-  /* Items */
-  const itemsDisponibles = [
-    { descripcion: "Ataud para Nicho N° 15", precio: 645000 },
-    { descripcion: "Ataud para Nicho Semi-Extraordinario", precio: 752000 },
-    { descripcion: "Ataud para Nicho Extraordinario", precio: 1160000 },
-    { descripcion: "Gastos Administrativos", precio: 182000 },
-    { descripcion: "Nicho Nuevo", precio: 950000 },
-    { descripcion: "Nicho Usado", precio: 450000 },
-    { descripcion: "Cremacion", precio: 920000 },
-    { descripcion: "Hora de Velacion", precio: 160000 },
-    { descripcion: "Traslado x Kilometro", precio: 5200 },
-    { descripcion: "Ataud para Tierra N° 15", precio: 418000 },
-    { descripcion: "Ataud para Tierra Semi-Extraordinario", precio: 490000 }
-  ];
+  tr.innerHTML = `
+    <td>
+      <select class="form-select">
+        <option></option>
+        ${items.map(i=>`<option data-precio="${i.p}">${i.d}</option>`).join("")}
+      </select>
+    </td>
+    <td><input type="number" value="1" class="form-control cant"></td>
+    <td class="precio">0</td>
+    <td class="sub">0</td>
+  `;
 
-  function calcularTotal() {
-    let total = 0;
+  tr.querySelector("select").addEventListener("change",e=>{
+    tr.querySelector(".precio").dataset.valor=e.target.selectedOptions[0].dataset.precio||0;
+    calcular();
+  });
+  tr.querySelector(".cant").addEventListener("input",calcular);
 
-    tbody.querySelectorAll("tr").forEach(tr => {
-      const cantidad = parseFloat(tr.querySelector(".cantidad").value) || 0;
-      const precio = parseFloat(tr.querySelector(".precio").innerText) || 0;
-      const importe = cantidad * precio;
+  document.getElementById("detalle-items").appendChild(tr);
+}
 
-      tr.querySelector(".importe").innerText = importe.toLocaleString("es-AR");
-      total += importe;
-    });
+function calcular(){
+  let neto=0;
+  document.querySelectorAll("#detalle-items tr").forEach(tr=>{
+    const cant=+tr.querySelector(".cant").value||0;
+    const precio=+tr.querySelector(".precio").dataset.valor||0;
+    const sub=cant*precio;
+    tr.querySelector(".precio").innerText=precio.toLocaleString("es-AR");
+    tr.querySelector(".sub").innerText=sub.toLocaleString("es-AR");
+    neto+=sub;
+  });
 
-    totalEl.innerText = total.toLocaleString("es-AR");
+  let iva=0,iibb=0;
+  if(document.getElementById("tipoFactura").value==="A"){
+    iva=neto*0.21;
+    iibb=neto*0.08;
   }
 
-  function agregarFila() {
-    const tr = document.createElement("tr");
+  document.getElementById("neto").innerText=neto.toLocaleString("es-AR");
+  document.getElementById("iva").innerText=iva.toLocaleString("es-AR");
+  document.getElementById("iibb").innerText=iibb.toLocaleString("es-AR");
+  document.getElementById("total").innerText=(neto+iva+iibb).toLocaleString("es-AR");
+}
 
-    /* Columna Detalle */
-    const tdDetalle = document.createElement("td");
-    const select = document.createElement("select");
-    select.className = "form-select";
-
-    const optEmpty = document.createElement("option");
-    optEmpty.textContent = "-- Seleccione ítem --";
-    optEmpty.value = "";
-    select.appendChild(optEmpty);
-
-    itemsDisponibles.forEach(it => {
-      const opt = document.createElement("option");
-      opt.value = it.descripcion;
-      opt.textContent = it.descripcion;
-      opt.dataset.precio = it.precio;
-      select.appendChild(opt);
-    });
-
-    tdDetalle.appendChild(select);
-
-    /* Cantidad */
-    const tdCantidad = document.createElement("td");
-    const inputCantidad = document.createElement("input");
-    inputCantidad.type = "number";
-    inputCantidad.value = 1;
-    inputCantidad.min = 1;
-    inputCantidad.className = "form-control cantidad";
-    tdCantidad.appendChild(inputCantidad);
-
-    /* Precio */
-    const tdPrecio = document.createElement("td");
-    tdPrecio.className = "precio";
-    tdPrecio.innerText = "0";
-
-    /* Subtotal */
-    const tdImporte = document.createElement("td");
-    tdImporte.className = "importe";
-    tdImporte.innerText = "0";
-
-    tr.appendChild(tdDetalle);
-    tr.appendChild(tdCantidad);
-    tr.appendChild(tdPrecio);
-    tr.appendChild(tdImporte);
-
-    tbody.appendChild(tr);
-
-    select.addEventListener("change", () => {
-      const sel = select.selectedOptions[0];
-      if (sel && sel.dataset.precio) {
-        tdPrecio.innerText = parseFloat(sel.dataset.precio).toLocaleString("es-AR");
-      } else {
-        tdPrecio.innerText = "0";
-      }
-      calcularTotal();
-    });
-
-    inputCantidad.addEventListener("input", calcularTotal);
-
-    calcularTotal();
-  }
-
-  btnAgregar.addEventListener("click", agregarFila);
-  btnImprimir.addEventListener("click", () => window.print());
-});
-
+document.getElementById("btnAgregar").onclick=agregarFila;
+document.getElementById("btnPrint").onclick=()=>window.print();
+document.getElementById("btnPDF").onclick=()=>html2pdf().from(document.body).save();
+document.getElementById("tipoFactura").onchange=calcular;
