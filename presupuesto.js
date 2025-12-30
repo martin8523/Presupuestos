@@ -60,6 +60,6 @@ function calcular(){
 
 document.getElementById("btnAgregar").onclick=agregarFila;
 document.getElementById("btnPrint").onclick=()=>window.print();
-document.getElementById("btnPDF").onclick=()=>html2pdf().from(document.body).save();
 document.getElementById("tipoFactura").onchange=calcular;
+
 
