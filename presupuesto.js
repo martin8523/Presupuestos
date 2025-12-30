@@ -1,11 +1,4 @@
-const items = [
-  { desc:"Ataud Nicho N°15", precio:645000 },
-  { desc:"Ataud Semi Extra", precio:752000 },
-  { desc:"Gastos Administrativos", precio:182000 },
-  { desc:"Cremación", precio:920000 },
-  { desc:"Nicho Nuevo", precio:950000 },
-  { desc:"Hora Velación", precio:160000 }
-];
+const items = JSON.parse(localStorage.getItem("items") || "[]");
 
 const tbody = document.getElementById("detalle");
 const tipo = document.getElementById("tipoFactura");
@@ -93,6 +86,7 @@ document.getElementById("pdf").onclick=()=>{
     jsPDF:{format:"a4",orientation:"portrait"}
   }).save();
 };
+
 
 
 
