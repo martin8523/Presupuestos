@@ -5,11 +5,7 @@ document.getElementById("numero").innerText =
   (hoy.getMonth()+1) + hoy.getDate() +
   Math.floor(Math.random()*1000);
 
-const items = [
-  { d:"Ataud", p:450000 },
-  { d:"Cremación", p:920000 },
-  { d:"Velatorio", p:160000 }
-];
+const items = JSON.parse(localStorage.getItem("items") || "[]");
 
 function agregarFila(){
   const tr = document.createElement("tr");
@@ -62,3 +58,4 @@ document.getElementById("btnAgregar").onclick=agregarFila;
 document.getElementById("btnPrint").onclick=()=>window.print();
 document.getElementById("btnPDF").onclick=()=>html2pdf().from(document.body).save();
 document.getElementById("tipoFactura").onchange=calcular;
+
