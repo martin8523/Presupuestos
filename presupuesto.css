@@ -50,7 +50,13 @@ button:hover { background-color: #45a049; }
   margin-top: 50px;
   background-color:rgb(236, 236, 236);
 }
-
+@media (min-width: 600px) {
+  .header {grid-area: 1 / span 6;}
+  .menu {grid-area: 2 / span 1;}
+  .content {grid-area: 2 / span 4;}
+  .facts {grid-area: 2 / span 1;}
+  .footer {grid-area: 3 / span 6;}
+}
 /* Impresión tipo factura */
 @media print {
   body {background-color: #45a049;}
@@ -58,3 +64,4 @@ button:hover { background-color: #45a049; }
   input , .cantidad {border-style: none;}
  
 }
+
