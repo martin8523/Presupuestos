@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { descripcion: "Ataud para Nicho Extraordinario", precio: 1160000 },
     { descripcion: "Nicho Nuevo", precio: 950000 },
     { descripcion: "Nicho Usado", precio: 480000 },
-    { descripcion: "Cremacion", precio: 920000 },
+    { descripcion: "Cremacion", precio: 1020000 },
     { descripcion: "Hora de Velación", precio: 160000 },
     { descripcion: "Gastos Administrativos", precio: 182000 },
 	{ descripcion: "Traslado por Kilometro", precio: 5200 },
@@ -116,3 +116,4 @@ document.addEventListener("DOMContentLoaded", () => {
   btnAgregar.addEventListener("click", agregarFila);
   btnImprimir.addEventListener("click", () => window.print());
 });
+
