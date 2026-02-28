@@ -16,9 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	{ descripcion: "Traslado por Kilometro", precio: 5200 },
     { descripcion: "Ataud para Tierra N° 15", precio: 418000 },
     { descripcion: "Ataud para Tierra Semi-Extraordinario", precio: 490000 },
+	{ descripcion: "Ataud para Tierra Extraordinario", precio: 8800000 },
 	{ descripcion: "Cambio de Ataud 15", precio: 227000 },
 	{ descripcion: "Cambio de Ataud Semi", precio: 262000 },
-	{ descripcion: "Cambio de Ataud Extra", precio: 670000 },
+	{ descripcion: "Cambio de Ataud Extra", precio: 460000 },
     { descripcion: "Ataud Angelito Nicho 2", precio: 330000 },
     { descripcion: "Ataud Angelito Nicho 4", precio: 345000 },
     { descripcion: "Ataud Angelito Nicho 6", precio: 350000 },
@@ -120,5 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
   btnAgregar.addEventListener("click", agregarFila);
   btnImprimir.addEventListener("click", () => window.print());
 });
+
 
 
