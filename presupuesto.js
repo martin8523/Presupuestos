@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { descripcion: "Ataud para Nicho Extraordinario", precio: 1160000 },
     { descripcion: "Nicho Nuevo", precio: 950000 },
     { descripcion: "Nicho Usado", precio: 480000 },
-    { descripcion: "Cremacion", precio: 1020000 },
+    { descripcion: "Cremacion", precio: 1180000 },
 	{ descripcion: "Servicio Velacion 8 Hs ", precio: 1268491 },
     { descripcion: "Hora de Velación", precio: 160000 },
     { descripcion: "Gastos Administrativos", precio: 182000 },
