@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { descripcion: "Nicho Usado", precio: 515000 },
     { descripcion: "Cremacion", precio: 1180000 },
 	{ descripcion: "Servicio Velacion 8 Hs ", precio: 3415000 },
-    { descripcion: "Hora de Velación", precio: 402000 },
+    { descripcion: "Hora de Velación", precio: 427000 },
     { descripcion: "Gastos Administrativos", precio: 75000 },
 	{ descripcion: "Auto Acomañamiento", precio: 125000 },
 	{ descripcion: "Ataud para Tierra N° 15", precio: 418000 },
