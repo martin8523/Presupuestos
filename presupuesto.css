@@ -48,6 +48,7 @@ button:hover { background-color: #540d97; }
 
 select{
   border-radius: 20px;
+  text-align: center;
 }
 
 .importe{
