@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	{ descripcion: "Ataud para Tierra N° 15", precio: 418000 },
     { descripcion: "Ataud para Tierra Semi-Extraordinario", precio: 490000 },
 	{ descripcion: "Ataud para Tierra Extraordinario", precio: 8800000 },
-	{ descripcion: "Cambio de Ataud 15", precio: 227000 },
+	{ descripcion: "Diferencia por Cambio de Ataud 15", precio: 227000 },
 	{ descripcion: "Cambio de Ataud Semi", precio: 262000 },
 	{ descripcion: "Cambio de Ataud Extra", precio: 460000 },
     { descripcion: "Ataud Angelito Nicho 2", precio: 330000 },
