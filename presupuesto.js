@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	{ descripcion: "Servicio Velacion 8 Hs ", precio: 3415000 },
     { descripcion: "Hora de Velación", precio: 427000 },
     { descripcion: "Gastos Administrativos", precio: 75000 },
-	{ descripcion: "Auto Acomañamiento", precio: 125000 },
+	{ descripcion: "Auto Acompañamiento", precio: 125000 },
 	{ descripcion: "Ataud para Tierra N° 15", precio: 418000 },
     { descripcion: "Ataud para Tierra Semi-Extraordinario", precio: 490000 },
 	{ descripcion: "Ataud para Tierra Extraordinario", precio: 8800000 },
